@@ -45,19 +45,19 @@ type result struct {
 
 // Summary is the machine-readable benchmark report.
 type Summary struct {
-	Label          string  `json:"label"`
-	Requests       int     `json:"requests"`
-	Concurrency    int     `json:"concurrency"`
-	CacheEnabled   bool    `json:"cache_enabled"`
-	Errors         int     `json:"errors"`
-	Throughput     float64 `json:"throughput_rps"`
-	CacheHitRate   float64 `json:"cache_hit_rate"`
-	TotalCostUSD   float64 `json:"total_cost_usd"`
-	LatencyP50Ms   float64 `json:"latency_p50_ms"`
-	LatencyP95Ms   float64 `json:"latency_p95_ms"`
-	LatencyP99Ms   float64 `json:"latency_p99_ms"`
-	LatencyMeanMs  float64 `json:"latency_mean_ms"`
-	WallSeconds    float64 `json:"wall_seconds"`
+	Label         string  `json:"label"`
+	Requests      int     `json:"requests"`
+	Concurrency   int     `json:"concurrency"`
+	CacheEnabled  bool    `json:"cache_enabled"`
+	Errors        int     `json:"errors"`
+	Throughput    float64 `json:"throughput_rps"`
+	CacheHitRate  float64 `json:"cache_hit_rate"`
+	TotalCostUSD  float64 `json:"total_cost_usd"`
+	LatencyP50Ms  float64 `json:"latency_p50_ms"`
+	LatencyP95Ms  float64 `json:"latency_p95_ms"`
+	LatencyP99Ms  float64 `json:"latency_p99_ms"`
+	LatencyMeanMs float64 `json:"latency_mean_ms"`
+	WallSeconds   float64 `json:"wall_seconds"`
 }
 
 func main() {

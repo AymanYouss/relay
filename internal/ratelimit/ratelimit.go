@@ -124,7 +124,7 @@ func (l *MemoryLimiter) Allow(_ context.Context, key string, rpm int) (Decision,
 		Allowed:    false,
 		Limit:      rpm,
 		Remaining:  0,
-		RetryAfter: time.Duration(deficit/refillRate*float64(time.Second)),
+		RetryAfter: time.Duration(deficit / refillRate * float64(time.Second)),
 	}, nil
 }
 

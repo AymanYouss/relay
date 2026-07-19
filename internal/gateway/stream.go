@@ -67,9 +67,9 @@ func (g *Gateway) Stream(ctx context.Context, p auth.Principal, req *apitypes.Ch
 	defer g.deps.Metrics.ActiveStreams.Dec()
 
 	var (
-		streamReader provider.StreamReader
-		firstChunk   apitypes.StreamChunk
-		usedEntry    modelEntry
+		streamReader  provider.StreamReader
+		firstChunk    apitypes.StreamChunk
+		usedEntry     modelEntry
 		upstreamStart time.Time
 	)
 	outcome := g.deps.Executor.Run(ctx, decision.Chain, func(ctx context.Context, model string) error {
@@ -104,8 +104,8 @@ func (g *Gateway) Stream(ctx context.Context, p auth.Principal, req *apitypes.Ch
 	// Relabel chunks to the logical model and stream to the client while
 	// accumulating the full text and token usage for caching and accounting.
 	var (
-		content strings.Builder
-		usage   apitypes.Usage
+		content  strings.Builder
+		usage    apitypes.Usage
 		streamID = firstChunk.ID
 	)
 	if streamID == "" {

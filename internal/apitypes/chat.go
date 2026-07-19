@@ -114,19 +114,19 @@ type RelayMeta struct {
 
 // StreamChunk is a single Server-Sent Events delta in a streaming response.
 type StreamChunk struct {
-	ID      string        `json:"id"`
-	Object  string        `json:"object"`
-	Created int64         `json:"created"`
-	Model   string        `json:"model"`
+	ID      string         `json:"id"`
+	Object  string         `json:"object"`
+	Created int64          `json:"created"`
+	Model   string         `json:"model"`
 	Choices []StreamChoice `json:"choices"`
-	Usage   *Usage        `json:"usage,omitempty"`
+	Usage   *Usage         `json:"usage,omitempty"`
 }
 
 // StreamChoice is a delta choice within a stream chunk.
 type StreamChoice struct {
-	Index        int          `json:"index"`
-	Delta        ChatMessage  `json:"delta"`
-	FinishReason *string      `json:"finish_reason"`
+	Index        int         `json:"index"`
+	Delta        ChatMessage `json:"delta"`
+	FinishReason *string     `json:"finish_reason"`
 }
 
 // PromptText flattens the messages into a single string used for embedding,

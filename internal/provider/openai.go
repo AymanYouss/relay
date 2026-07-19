@@ -58,19 +58,19 @@ func (o *OpenAI) newRequest(ctx context.Context, path string, body any) (*http.R
 // wire is the OpenAI request payload. We build it explicitly rather than
 // forwarding Relay extensions so provider-specific fields never leak upstream.
 type openAIChatRequest struct {
-	Model            string                  `json:"model"`
-	Messages         []apitypes.ChatMessage  `json:"messages"`
-	Temperature      *float64                `json:"temperature,omitempty"`
-	TopP             *float64                `json:"top_p,omitempty"`
-	MaxTokens        *int                    `json:"max_tokens,omitempty"`
-	Stream           bool                    `json:"stream,omitempty"`
-	StreamOptions    *streamOptions          `json:"stream_options,omitempty"`
-	Stop             []string                `json:"stop,omitempty"`
-	PresencePenalty  *float64                `json:"presence_penalty,omitempty"`
-	FrequencyPenalty *float64                `json:"frequency_penalty,omitempty"`
-	Tools            []apitypes.Tool         `json:"tools,omitempty"`
-	ToolChoice       any                     `json:"tool_choice,omitempty"`
-	User             string                  `json:"user,omitempty"`
+	Model            string                 `json:"model"`
+	Messages         []apitypes.ChatMessage `json:"messages"`
+	Temperature      *float64               `json:"temperature,omitempty"`
+	TopP             *float64               `json:"top_p,omitempty"`
+	MaxTokens        *int                   `json:"max_tokens,omitempty"`
+	Stream           bool                   `json:"stream,omitempty"`
+	StreamOptions    *streamOptions         `json:"stream_options,omitempty"`
+	Stop             []string               `json:"stop,omitempty"`
+	PresencePenalty  *float64               `json:"presence_penalty,omitempty"`
+	FrequencyPenalty *float64               `json:"frequency_penalty,omitempty"`
+	Tools            []apitypes.Tool        `json:"tools,omitempty"`
+	ToolChoice       any                    `json:"tool_choice,omitempty"`
+	User             string                 `json:"user,omitempty"`
 }
 
 type streamOptions struct {

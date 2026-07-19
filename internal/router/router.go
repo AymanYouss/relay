@@ -43,12 +43,12 @@ func (d Decision) Primary() string {
 // Router turns a request into a routing decision using the configured strategy
 // and per-model fallback chains.
 type Router struct {
-	strategy   string
-	cheapModel string
+	strategy    string
+	cheapModel  string
 	strongModel string
-	threshold  float64
-	models     map[string]config.ModelConfig
-	classifier Classifier
+	threshold   float64
+	models      map[string]config.ModelConfig
+	classifier  Classifier
 }
 
 // New builds a Router from configuration.

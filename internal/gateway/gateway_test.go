@@ -115,7 +115,7 @@ func newHarness(t *testing.T, cacheOn bool) *testHarness {
 	reg := provider.NewRegistry(cheap, strong, backup)
 
 	cfg := &config.Config{
-		Cache: config.CacheConfig{Enabled: cacheOn, SimilarityThreshold: 0.9, Namespace: "test", MaxCandidates: 5},
+		Cache:  config.CacheConfig{Enabled: cacheOn, SimilarityThreshold: 0.9, Namespace: "test", MaxCandidates: 5},
 		Router: config.RouterConfig{Strategy: "auto", CheapModel: "cheap", StrongModel: "strong", ComplexityThreshold: 0.55},
 		Models: []config.ModelConfig{
 			{Name: "cheap", Provider: "cheap-prov", Upstream: "cheap-u", Tier: "cheap", InputPricePerM: 0.15, OutputPricePerM: 0.6, Fallbacks: []string{"backup"}},

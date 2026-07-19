@@ -117,6 +117,26 @@ type Dashboard struct {
 	Recent  []Event          `json:"recent"`
 }
 
+// ensureNonNil replaces nil slices with empty ones so the JSON API always emits
+// arrays (never null), which keeps clients that iterate the fields simple.
+func (d *Dashboard) ensureNonNil() {
+	if d.Series == nil {
+		d.Series = []DailyPoint{}
+	}
+	if d.Models == nil {
+		d.Models = []ModelUsage{}
+	}
+	if d.Routes == nil {
+		d.Routes = []RouteBreakdown{}
+	}
+	if d.Keys == nil {
+		d.Keys = []KeyUsage{}
+	}
+	if d.Recent == nil {
+		d.Recent = []Event{}
+	}
+}
+
 // Store persists events and answers analytics and budget queries.
 type Store interface {
 	Record(ctx context.Context, e Event) error
@@ -146,5 +166,5 @@ func percentile(sorted []float64, p float64) float64 {
 	return sorted[rank]
 }
 
-func dayKey(t time.Time) string { return t.UTC().Format("2006-01-02") }
+func dayKey(t time.Time) string   { return t.UTC().Format("2006-01-02") }
 func monthKey(t time.Time) string { return t.UTC().Format("2006-01") }
