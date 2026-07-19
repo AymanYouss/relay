@@ -20,6 +20,7 @@ coverage.html
 web/node_modules/
 web/dist/
 web/.vite/
+*.tsbuildinfo
 *.log
 
 # Editors / OS

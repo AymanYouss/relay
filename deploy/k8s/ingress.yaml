@@ -1,0 +1,31 @@
+# Public API exposed through an AWS Application Load Balancer provisioned by the
+# AWS Load Balancer Controller. The admin port (9090) is deliberately NOT routed
+# here; expose it internally or behind an authenticated internal ingress only.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: relay
+  namespace: relay
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/certificate-arn: ${ACM_CERTIFICATE_ARN}
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=300
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=30
+spec:
+  rules:
+    - host: ${RELAY_HOST}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: relay
+                port:
+                  number: 80

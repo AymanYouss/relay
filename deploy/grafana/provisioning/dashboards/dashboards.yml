@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: Relay
+    orgId: 1
+    folder: Relay
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

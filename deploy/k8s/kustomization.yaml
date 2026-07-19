@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: relay
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - hpa.yaml
+  - ingress.yaml
+  - servicemonitor.yaml
+  - poddisruptionbudget.yaml
+  # secret.example.yaml is intentionally excluded; provide secrets out-of-band.
+
+images:
+  - name: ghcr.io/aymanyouss/relay
+    newTag: latest
+
+commonLabels:
+  app.kubernetes.io/part-of: relay

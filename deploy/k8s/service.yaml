@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: relay
+  namespace: relay
+  labels:
+    app.kubernetes.io/name: relay
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: relay
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: admin
+      port: 9090
+      targetPort: admin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: relay-admin
+  namespace: relay
+  labels:
+    app.kubernetes.io/name: relay
+    app.kubernetes.io/component: admin
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: relay
+  ports:
+    - name: admin
+      port: 9090
+      targetPort: admin

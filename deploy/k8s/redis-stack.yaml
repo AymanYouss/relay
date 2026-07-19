@@ -1,0 +1,67 @@
+# Redis Stack provides the RediSearch vector index for the semantic cache.
+# ElastiCache for Redis OSS does not bundle RediSearch, so the KNN index runs
+# here as a StatefulSet. Rate-limit and accounting counters can point at the same
+# instance or at ElastiCache. For higher scale, replace this with a managed
+# RediSearch (Redis Cloud) or a BlazeKV-backed VectorStore.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-stack
+  namespace: relay
+spec:
+  serviceName: redis-stack
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: redis-stack
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: redis-stack
+    spec:
+      securityContext:
+        fsGroup: 999
+      containers:
+        - name: redis-stack
+          image: redis/redis-stack-server:7.4.0-v1
+          ports:
+            - name: redis
+              containerPort: 6379
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
+          readinessProbe:
+            exec:
+              command: ["redis-cli", "ping"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: gp3
+        resources:
+          requests:
+            storage: 20Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-stack
+  namespace: relay
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: redis-stack
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: redis

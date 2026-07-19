@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: relay-config
+  namespace: relay
+data:
+  relay.yaml: |
+    server:
+      addr: :8080
+      admin_addr: :9090
+      read_timeout: 60s
+      shutdown_timeout: 25s
+      admin_token: ${RELAY_ADMIN_TOKEN}
+
+    redis:
+      addr: ${REDIS_ADDR}
+      password: ${REDIS_PASSWORD:-}
+      db: 0
+      backend: redis
+
+    cache:
+      enabled: true
+      similarity_threshold: 0.92
+      ttl: 24h
+      max_candidates: 5
+      namespace: prod
+
+    router:
+      strategy: auto
+      cheap_model: gpt-4o-mini
+      strong_model: gpt-4o
+      complexity_threshold: 0.55
+      max_retries: 2
+      retry_backoff: 200ms
+
+    embedding:
+      provider: openai
+      model: text-embedding-3-small
+      dimensions: 1536
+
+    providers:
+      - name: openai
+        kind: openai
+        base_url: https://api.openai.com/v1
+        api_key: ${OPENAI_API_KEY}
+        timeout: 120s
+      - name: anthropic
+        kind: anthropic
+        base_url: https://api.anthropic.com/v1
+        api_key: ${ANTHROPIC_API_KEY}
+        timeout: 120s
+
+    models:
+      - name: gpt-4o-mini
+        provider: openai
+        tier: cheap
+        input_price_per_m: 0.15
+        output_price_per_m: 0.60
+        fallbacks: [claude-3-5-haiku]
+      - name: gpt-4o
+        provider: openai
+        tier: strong
+        input_price_per_m: 2.50
+        output_price_per_m: 10.00
+        fallbacks: [claude-3-5-sonnet]
+      - name: claude-3-5-sonnet
+        provider: anthropic
+        upstream: claude-3-5-sonnet-20241022
+        tier: strong
+        input_price_per_m: 3.00
+        output_price_per_m: 15.00
+      - name: claude-3-5-haiku
+        provider: anthropic
+        upstream: claude-3-5-haiku-20241022
+        tier: cheap
+        input_price_per_m: 0.80
+        output_price_per_m: 4.00
+      - name: text-embedding-3-small
+        provider: openai
+        input_price_per_m: 0.02
+        output_price_per_m: 0.0
+
+    api_keys:
+      - key: ${RELAY_KEY_TEAM_A}
+        name: team-a
+        rate_limit_rpm: 600
+        monthly_budget_usd: 2000
+      - key: ${RELAY_KEY_TEAM_B}
+        name: team-b
+        rate_limit_rpm: 120
+        monthly_budget_usd: 250
+
+    telemetry:
+      service_name: relay
+      otlp_endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      trace_sampling: 0.1
+      metrics_enabled: true

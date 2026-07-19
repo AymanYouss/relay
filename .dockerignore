@@ -1,0 +1,14 @@
+.git
+.github
+bin
+dist
+coverage.txt
+coverage.html
+*.md
+docs
+deploy/aws
+web/node_modules
+web/dist
+**/.DS_Store
+relay.yaml
+.env

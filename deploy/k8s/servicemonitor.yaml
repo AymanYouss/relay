@@ -1,0 +1,19 @@
+# Requires the Prometheus Operator (kube-prometheus-stack). Scrapes the admin
+# port's /metrics endpoint.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: relay
+  namespace: relay
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames: [relay]
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: admin
+  endpoints:
+    - port: admin
+      path: /metrics
+      interval: 15s

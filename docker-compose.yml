@@ -1,0 +1,73 @@
+name: relay
+
+services:
+  relay:
+    build:
+      context: .
+      args:
+        VERSION: local
+    image: relay:latest
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:8080"   # public OpenAI-compatible API
+      - "9090:9090"   # admin API, metrics, dashboard
+    environment:
+      REDIS_ADDR: redis:6379
+      RELAY_BACKEND: redis
+      RELAY_ADMIN_TOKEN: ${RELAY_ADMIN_TOKEN:-change-me-admin-token}
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel-collector:4318
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      RELAY_KEY_TEAM_A: ${RELAY_KEY_TEAM_A:-sk-relay-team-a}
+      RELAY_KEY_TEAM_B: ${RELAY_KEY_TEAM_B:-sk-relay-team-b}
+    restart: unless-stopped
+
+  # Redis Stack provides the RediSearch vector index used by the semantic cache.
+  redis:
+    image: redis/redis-stack-server:7.4.0-v1
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.115.1
+    command: ["--config=/etc/otel-collector.yaml"]
+    volumes:
+      - ./deploy/otel/otel-collector.yaml:/etc/otel-collector.yaml:ro
+    ports:
+      - "4318:4318"   # OTLP HTTP
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    volumes:
+      - ./deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9091:9090"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    depends_on: [prometheus]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+    volumes:
+      - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./deploy/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  redis-data:
