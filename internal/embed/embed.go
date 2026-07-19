@@ -103,7 +103,8 @@ func (h *HashEmbedder) vector(text string) []float32 {
 func tokenize(s string) []string {
 	s = strings.ToLower(s)
 	fields := strings.FieldsFunc(s, func(r rune) bool {
-		return !(r >= 'a' && r <= 'z') && !(r >= '0' && r <= '9')
+		isAlnum := (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9')
+		return !isAlnum
 	})
 	return fields
 }

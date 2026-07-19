@@ -9,6 +9,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"go.opentelemetry.io/otel"
+
 	"github.com/AymanYouss/relay/internal/apitypes"
 	"github.com/AymanYouss/relay/internal/auth"
 	"github.com/AymanYouss/relay/internal/cache"
@@ -18,9 +22,6 @@ import (
 	"github.com/AymanYouss/relay/internal/router"
 	"github.com/AymanYouss/relay/internal/telemetry"
 	"github.com/AymanYouss/relay/internal/usage"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-	"go.opentelemetry.io/otel"
 )
 
 // fakeProvider is a programmable provider for pipeline tests.

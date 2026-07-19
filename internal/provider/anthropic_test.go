@@ -11,9 +11,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/AymanYouss/relay/internal/apitypes"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/AymanYouss/relay/internal/apitypes"
 )
 
 func TestAnthropicRequestTranslation(t *testing.T) {

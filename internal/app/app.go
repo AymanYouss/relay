@@ -12,6 +12,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/redis/go-redis/v9"
+
 	"github.com/AymanYouss/relay/internal/auth"
 	"github.com/AymanYouss/relay/internal/cache"
 	"github.com/AymanYouss/relay/internal/config"
@@ -23,7 +25,6 @@ import (
 	"github.com/AymanYouss/relay/internal/server"
 	"github.com/AymanYouss/relay/internal/telemetry"
 	"github.com/AymanYouss/relay/internal/usage"
-	"github.com/redis/go-redis/v9"
 )
 
 // Version is set at build time via -ldflags.

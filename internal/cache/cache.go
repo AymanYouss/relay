@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/google/uuid"
+
 	"github.com/AymanYouss/relay/internal/apitypes"
 	"github.com/AymanYouss/relay/internal/embed"
-	"github.com/google/uuid"
 )
 
 // SemanticCache decides whether an incoming request can be served from a

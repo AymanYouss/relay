@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
+
 	"github.com/AymanYouss/relay/internal/server/webui"
 	"github.com/AymanYouss/relay/internal/usage"
-	"github.com/go-chi/chi/v5"
 )
 
 // handleDashboard returns the aggregated analytics payload for the admin UI,

@@ -32,7 +32,7 @@ type Match struct {
 	Score float64
 }
 
-// VectorStore persists cache entries and answers nearest-neighbour queries.
+// VectorStore persists cache entries and answers nearest-neighbor queries.
 type VectorStore interface {
 	// Upsert stores or replaces an entry, expiring it after ttl (0 = no expiry).
 	Upsert(ctx context.Context, e Entry, ttl time.Duration) error

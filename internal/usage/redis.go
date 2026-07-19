@@ -179,8 +179,8 @@ func (s *RedisStore) Query(ctx context.Context, windowDays int) (Dashboard, erro
 		if err != nil && err != redis.Nil {
 			return dash, err
 		}
-		for strat, n := range rh {
-			routeAgg[strat] += parseInt(n)
+		for strategy, n := range rh {
+			routeAgg[strategy] += parseInt(n)
 		}
 	}
 
@@ -209,8 +209,8 @@ func (s *RedisStore) Query(ctx context.Context, windowDays int) (Dashboard, erro
 	}
 	sort.Slice(dash.Models, func(i, j int) bool { return dash.Models[i].Requests > dash.Models[j].Requests })
 
-	for strat, n := range routeAgg {
-		dash.Routes = append(dash.Routes, RouteBreakdown{Strategy: strat, Requests: n})
+	for strategy, n := range routeAgg {
+		dash.Routes = append(dash.Routes, RouteBreakdown{Strategy: strategy, Requests: n})
 	}
 	sort.Slice(dash.Routes, func(i, j int) bool { return dash.Routes[i].Requests > dash.Routes[j].Requests })
 

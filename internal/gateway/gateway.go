@@ -10,6 +10,10 @@ import (
 	"log/slog"
 	"time"
 
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
+
 	"github.com/AymanYouss/relay/internal/apitypes"
 	"github.com/AymanYouss/relay/internal/auth"
 	"github.com/AymanYouss/relay/internal/cache"
@@ -18,9 +22,6 @@ import (
 	"github.com/AymanYouss/relay/internal/router"
 	"github.com/AymanYouss/relay/internal/telemetry"
 	"github.com/AymanYouss/relay/internal/usage"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/codes"
-	"go.opentelemetry.io/otel/trace"
 )
 
 // Sentinel errors surfaced to the HTTP layer for status mapping.

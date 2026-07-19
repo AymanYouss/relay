@@ -216,7 +216,7 @@ func doRequest(client *http.Client, opt options, prompt string) result {
 	}
 	defer resp.Body.Close()
 	var cr chatResponse
-	json.NewDecoder(resp.Body).Decode(&cr)
+	_ = json.NewDecoder(resp.Body).Decode(&cr)
 	return result{
 		latency:  time.Since(start),
 		cacheHit: cr.Relay.CacheHit,
@@ -246,7 +246,7 @@ func writeJSON(path string, s Summary) {
 	defer f.Close()
 	enc := json.NewEncoder(f)
 	enc.SetIndent("", "  ")
-	enc.Encode(s)
+	_ = enc.Encode(s)
 }
 
 func hotSet(all []string, n int) []string {

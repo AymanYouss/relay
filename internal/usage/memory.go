@@ -184,8 +184,8 @@ func (m *MemoryStore) Query(_ context.Context, windowDays int) (Dashboard, error
 	}
 	sort.Slice(dash.Models, func(i, j int) bool { return dash.Models[i].Requests > dash.Models[j].Requests })
 
-	for strat, n := range routeAgg {
-		dash.Routes = append(dash.Routes, RouteBreakdown{Strategy: strat, Requests: n})
+	for strategy, n := range routeAgg {
+		dash.Routes = append(dash.Routes, RouteBreakdown{Strategy: strategy, Requests: n})
 	}
 	sort.Slice(dash.Routes, func(i, j int) bool { return dash.Routes[i].Requests > dash.Routes[j].Requests })
 
