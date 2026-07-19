@@ -1,0 +1,54 @@
+# Benchmark configuration for cmd/relaybench + cmd/mockllm.
+# Uses the in-memory backend and the local hash embedder so the harness runs
+# with zero external dependencies and no provider spend.
+
+server:
+  addr: :8080
+  admin_addr: :9090
+  admin_token: bench-admin
+
+redis:
+  backend: memory
+
+cache:
+  enabled: true
+  similarity_threshold: 0.9
+  ttl: 1h
+  namespace: bench
+
+router:
+  strategy: auto
+  cheap_model: gpt-4o-mini
+  strong_model: gpt-4o
+  complexity_threshold: 0.55
+  max_retries: 2
+
+embedding:
+  provider: ""        # empty selects the dependency-free local hash embedder
+  dimensions: 512
+
+providers:
+  - name: mock
+    kind: openai
+    base_url: http://localhost:1234/v1
+    api_key: sk-mock
+
+models:
+  - name: gpt-4o-mini
+    provider: mock
+    tier: cheap
+    input_price_per_m: 0.15
+    output_price_per_m: 0.60
+  - name: gpt-4o
+    provider: mock
+    tier: strong
+    input_price_per_m: 2.50
+    output_price_per_m: 10.00
+
+api_keys:
+  - key: sk-relay-team-a
+    name: bench
+    rate_limit_rpm: 100000
+
+telemetry:
+  service_name: relay-bench
