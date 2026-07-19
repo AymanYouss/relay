@@ -1,7 +1,9 @@
 # Binaries
 /bin/
 /dist/
-relay
+/relay
+/mockllm
+/relaybench
 *.exe
 *.test
 *.out
