@@ -5,10 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/AymanYouss/relay/internal/apitypes"
-	"github.com/AymanYouss/relay/internal/embed"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/AymanYouss/relay/internal/apitypes"
+	"github.com/AymanYouss/relay/internal/embed"
 )
 
 func newTestCache(threshold float64) *SemanticCache {

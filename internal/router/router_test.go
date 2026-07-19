@@ -3,10 +3,11 @@ package router
 import (
 	"testing"
 
-	"github.com/AymanYouss/relay/internal/apitypes"
-	"github.com/AymanYouss/relay/internal/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/AymanYouss/relay/internal/apitypes"
+	"github.com/AymanYouss/relay/internal/config"
 )
 
 func testModels() []config.ModelConfig {

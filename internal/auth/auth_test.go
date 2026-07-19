@@ -4,9 +4,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/AymanYouss/relay/internal/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/AymanYouss/relay/internal/config"
 )
 
 func TestAuthenticate(t *testing.T) {

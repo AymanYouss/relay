@@ -65,12 +65,3 @@ func (c *catalog) Resolve(model string) (ModelInfo, bool) {
 	e, ok := c.models[model]
 	return ModelInfo{entry: e}, ok
 }
-
-// pricingTable returns a model->pricing map for the usage recorder.
-func (c *catalog) pricingTable() map[string]usage.Pricing {
-	out := make(map[string]usage.Pricing, len(c.models))
-	for name, e := range c.models {
-		out[name] = e.pricing
-	}
-	return out
-}

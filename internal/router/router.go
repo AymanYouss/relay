@@ -89,8 +89,8 @@ func (r *Router) Resolve(req *apitypes.ChatCompletionRequest) Decision {
 	// routing alias; otherwise the model is pinned.
 	route := strings.TrimSpace(req.RelayRoute)
 	if route == "" {
-		if strat, ok := routingAliases[strings.ToLower(req.Model)]; ok {
-			route = strat
+		if strategy, ok := routingAliases[strings.ToLower(req.Model)]; ok {
+			route = strategy
 		} else if req.Model == "" {
 			route = r.strategy
 		} else if _, defined := r.models[req.Model]; defined {
@@ -131,11 +131,11 @@ func (r *Router) Resolve(req *apitypes.ChatCompletionRequest) Decision {
 // fallbacks, de-duplicated and skipping undefined models.
 func (r *Router) pinned(model, reason string) Decision {
 	chain := r.chainFor(model)
-	strat := StrategyQuality
+	strategy := StrategyQuality
 	if model == r.cheapModel {
-		strat = StrategyCost
+		strategy = StrategyCost
 	}
-	return Decision{Chain: chain, Strategy: strat, Reason: reason}
+	return Decision{Chain: chain, Strategy: strategy, Reason: reason}
 }
 
 func (r *Router) chainFor(model string) []Hop {

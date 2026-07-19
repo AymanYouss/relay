@@ -24,7 +24,7 @@ type chatRequest struct {
 	Stream bool `json:"stream"`
 }
 
-// modelProfile describes the simulated behaviour of a model.
+// modelProfile describes the simulated behavior of a model.
 type modelProfile struct {
 	baseMs   int
 	jitterMs int
@@ -85,5 +85,5 @@ func handleChat(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(resp)
+	_ = json.NewEncoder(w).Encode(resp)
 }

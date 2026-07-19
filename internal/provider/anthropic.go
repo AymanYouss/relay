@@ -10,8 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AymanYouss/relay/internal/apitypes"
 	"github.com/google/uuid"
+
+	"github.com/AymanYouss/relay/internal/apitypes"
 )
 
 const anthropicVersion = "2023-06-01"

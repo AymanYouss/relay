@@ -8,13 +8,14 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/AymanYouss/relay/internal/auth"
-	"github.com/AymanYouss/relay/internal/telemetry"
 	"github.com/google/uuid"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
+
+	"github.com/AymanYouss/relay/internal/auth"
+	"github.com/AymanYouss/relay/internal/telemetry"
 )
 
 type ctxKey int

@@ -10,14 +10,15 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+
 	"github.com/AymanYouss/relay/internal/auth"
 	"github.com/AymanYouss/relay/internal/config"
 	"github.com/AymanYouss/relay/internal/gateway"
 	"github.com/AymanYouss/relay/internal/ratelimit"
 	"github.com/AymanYouss/relay/internal/telemetry"
 	"github.com/AymanYouss/relay/internal/usage"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 )
 
 // Deps are the server's collaborators.

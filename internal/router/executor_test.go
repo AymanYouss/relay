@@ -6,9 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/AymanYouss/relay/internal/provider"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/AymanYouss/relay/internal/provider"
 )
 
 func TestExecutorSucceedsFirstTry(t *testing.T) {

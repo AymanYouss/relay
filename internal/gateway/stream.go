@@ -7,14 +7,15 @@ import (
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
+
 	"github.com/AymanYouss/relay/internal/apitypes"
 	"github.com/AymanYouss/relay/internal/auth"
 	"github.com/AymanYouss/relay/internal/provider"
 	"github.com/AymanYouss/relay/internal/router"
 	"github.com/AymanYouss/relay/internal/usage"
-	"github.com/google/uuid"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/trace"
 )
 
 // ChunkFunc receives one normalized streaming chunk. Returning an error aborts

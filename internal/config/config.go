@@ -55,7 +55,7 @@ type CacheConfig struct {
 	Enabled             bool          `yaml:"enabled"`
 	SimilarityThreshold float64       `yaml:"similarity_threshold"`
 	TTL                 time.Duration `yaml:"ttl"`
-	// MaxCandidates bounds how many neighbours the vector search returns.
+	// MaxCandidates bounds how many neighbors the vector search returns.
 	MaxCandidates int `yaml:"max_candidates"`
 	// Namespace isolates cache entries per tenant/environment.
 	Namespace string `yaml:"namespace"`
