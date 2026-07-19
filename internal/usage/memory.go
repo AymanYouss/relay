@@ -201,6 +201,7 @@ func (m *MemoryStore) Query(_ context.Context, windowDays int) (Dashboard, error
 		dash.Recent = append(dash.Recent, m.events[i])
 	}
 
+	dash.ensureNonNil()
 	return dash, nil
 }
 

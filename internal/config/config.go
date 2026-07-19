@@ -52,9 +52,9 @@ type RedisConfig struct {
 
 // CacheConfig controls the semantic cache.
 type CacheConfig struct {
-	Enabled            bool          `yaml:"enabled"`
-	SimilarityThreshold float64      `yaml:"similarity_threshold"`
-	TTL                time.Duration `yaml:"ttl"`
+	Enabled             bool          `yaml:"enabled"`
+	SimilarityThreshold float64       `yaml:"similarity_threshold"`
+	TTL                 time.Duration `yaml:"ttl"`
 	// MaxCandidates bounds how many neighbours the vector search returns.
 	MaxCandidates int `yaml:"max_candidates"`
 	// Namespace isolates cache entries per tenant/environment.
@@ -119,8 +119,8 @@ type TelemetryConfig struct {
 
 // APIKeyConfig defines a client API key, its budget and rate limit.
 type APIKeyConfig struct {
-	Key   string `yaml:"key"`
-	Name  string `yaml:"name"`
+	Key  string `yaml:"key"`
+	Name string `yaml:"name"`
 	// RateLimitRPM caps requests per minute (0 = unlimited).
 	RateLimitRPM int `yaml:"rate_limit_rpm"`
 	// MonthlyBudgetUSD caps spend per calendar month (0 = unlimited).

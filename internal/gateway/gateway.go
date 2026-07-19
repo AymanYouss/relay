@@ -139,10 +139,10 @@ func (g *Gateway) Complete(ctx context.Context, p auth.Principal, req *apitypes.
 	}
 
 	var (
-		resp      *apitypes.ChatCompletionResponse
-		usedEntry modelEntry
+		resp          *apitypes.ChatCompletionResponse
+		usedEntry     modelEntry
 		upstreamStart time.Time
-		upstreamMS int64
+		upstreamMS    int64
 	)
 	outcome := g.deps.Executor.Run(ctx, decision.Chain, func(ctx context.Context, model string) error {
 		entry, ok := g.catalog.resolve(model)

@@ -247,6 +247,7 @@ func (s *RedisStore) Query(ctx context.Context, windowDays int) (Dashboard, erro
 		}
 	}
 
+	dash.ensureNonNil()
 	return dash, nil
 }
 
