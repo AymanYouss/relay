@@ -1,0 +1,15 @@
+{
+  "label": "cache-on",
+  "requests": 3000,
+  "concurrency": 32,
+  "cache_enabled": true,
+  "errors": 0,
+  "throughput_rps": 123.3459682530592,
+  "cache_hit_rate": 0.437,
+  "total_cost_usd": 0.29114744999999975,
+  "latency_p50_ms": 351.608,
+  "latency_p95_ms": 559.687,
+  "latency_p99_ms": 576.795,
+  "latency_mean_ms": 255.99647000000013,
+  "wall_seconds": 24.321832667
+}
