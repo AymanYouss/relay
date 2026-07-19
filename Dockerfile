@@ -4,13 +4,13 @@
 FROM node:22-alpine AS web
 WORKDIR /web
 RUN corepack enable
-COPY web/package.json web/pnpm-lock.yaml* ./
+COPY web/package.json web/pnpm-lock.yaml* web/pnpm-workspace.yaml* ./
 RUN pnpm install --frozen-lockfile || pnpm install
 COPY web/ ./
 RUN pnpm build
 
 # --- Stage 2: build the Go binary with embedded assets ---
-FROM golang:1.23-alpine AS build
+FROM golang:1.25-alpine AS build
 WORKDIR /src
 RUN apk add --no-cache git ca-certificates
 COPY go.mod go.sum ./

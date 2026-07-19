@@ -9,7 +9,7 @@ caching, cost- and complexity-aware routing, automatic failover, per-key budgets
 and full observability.
 
 [![CI](https://github.com/AymanYouss/relay/actions/workflows/ci.yml/badge.svg)](https://github.com/AymanYouss/relay/actions/workflows/ci.yml)
-[![Go](https://img.shields.io/badge/Go-1.23-00ADD8?logo=go&logoColor=white)](https://go.dev)
+[![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go&logoColor=white)](https://go.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0f766e.svg)](LICENSE)
 [![Image](https://img.shields.io/badge/image-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/AymanYouss/relay/pkgs/container/relay)
 
