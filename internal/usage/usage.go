@@ -26,26 +26,26 @@ func (p Pricing) Cost(promptTokens, completionTokens int) float64 {
 
 // Event is a single completed request as seen by the accounting layer.
 type Event struct {
-	Time             time.Time
-	KeyID            string
-	KeyName          string
-	RequestedModel   string
-	Model            string
-	Provider         string
-	Strategy         string
-	Complexity       float64
-	RouteReason      string
-	PromptTokens     int
-	CompletionTokens int
-	CostUSD          float64
+	Time             time.Time `json:"time"`
+	KeyID            string    `json:"key_id"`
+	KeyName          string    `json:"key_name"`
+	RequestedModel   string    `json:"requested_model"`
+	Model            string    `json:"model"`
+	Provider         string    `json:"provider"`
+	Strategy         string    `json:"strategy"`
+	Complexity       float64   `json:"complexity"`
+	RouteReason      string    `json:"route_reason"`
+	PromptTokens     int       `json:"prompt_tokens"`
+	CompletionTokens int       `json:"completion_tokens"`
+	CostUSD          float64   `json:"cost_usd"`
 	// SavedUSD is the cost that would have been incurred upstream but was avoided
 	// because the response was served from the semantic cache.
-	SavedUSD   float64
-	CacheHit   bool
-	CacheScore float64
-	LatencyMS  int64
-	Status     string // "ok" or "error"
-	Error      string
+	SavedUSD   float64 `json:"saved_usd"`
+	CacheHit   bool    `json:"cache_hit"`
+	CacheScore float64 `json:"cache_score"`
+	LatencyMS  int64   `json:"latency_ms"`
+	Status     string  `json:"status"` // "ok" or "error"
+	Error      string  `json:"error,omitempty"`
 }
 
 // Summary aggregates a time window for the dashboard headline cards.
