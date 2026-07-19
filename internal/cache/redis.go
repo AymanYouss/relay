@@ -36,6 +36,13 @@ func NewRedisStore(addr, password string, db, dims int) (*RedisStore, error) {
 		DB:       db,
 		Protocol: 2,
 	})
+	return NewRedisStoreFromClient(rdb, dims)
+}
+
+// NewRedisStoreFromClient builds a store on an existing client, so the cache,
+// rate limiter and usage accounting can share one connection pool. The client
+// must be configured with RESP2 (Protocol: 2) for FT.SEARCH reply parsing.
+func NewRedisStoreFromClient(rdb *redis.Client, dims int) (*RedisStore, error) {
 	s := &RedisStore{rdb: rdb, index: "relay_cache_idx", dims: dims}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

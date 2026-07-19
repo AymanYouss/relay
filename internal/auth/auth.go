@@ -96,6 +96,16 @@ func (ks *KeyStore) Authenticate(rawKey string) (Principal, bool) {
 	return rec.principal, true
 }
 
+// Principals returns every configured principal. Used by the admin API to list
+// keys (including those with no usage yet) alongside their limits.
+func (ks *KeyStore) Principals() []Principal {
+	out := make([]Principal, 0, len(ks.byDigest))
+	for _, rec := range ks.byDigest {
+		out = append(out, rec.principal)
+	}
+	return out
+}
+
 // BearerToken extracts a key from an Authorization: Bearer header or the
 // OpenAI-style api-key header.
 func BearerToken(r *http.Request) string {
